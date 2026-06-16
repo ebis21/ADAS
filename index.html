@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADAŚ — Sklep zoologiczno-wędkarski</title>
+<meta name="description" content="ADAŚ — sklep zoologiczno-wędkarski. Karmy i akcesoria dla zwierząt oraz sprzęt wędkarski. [DO PODMIANY: opis SEO]">
+
+<!-- ============================================================
+     CZCIONKI "TERENOWE"
+     Bebas Neue / Oswald — mocne, kondensowane nagłówki
+     Source Sans 3      — czytelny tekst podstawowy
+     ============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   1. ZMIENNE — PALETA ZIEMISTA + USTAWIENIA GLOBALNE
+   ============================================================ */
+:root{
+  /* Paleta: leśna zieleń, brąz drewna, granat wody, akcent musztardowy */
+  --las:        #2f4a37;   /* leśna zieleń (główny ciemny) */
+  --las-gleb:   #1d2f23;   /* najgłębsza zieleń / tła */
+  --mech:       #5a7355;   /* zgaszona zieleń */
+  --drewno:     #6b4a2f;   /* brąz drewna */
+  --drewno-cie: #4a3220;   /* ciemne drewno */
+  --woda:       #1c3a52;   /* granat wody */
+  --woda-jasna: #2e6285;   /* jaśniejsza woda */
+  --musztarda:  #d4943a;   /* akcent musztardowy */
+  --musztarda-j:#e8b15c;   /* jasna musztarda */
+  --kraft:      #d9c7a3;   /* papier kraft */
+  --kraft-jasn: #ece0c6;   /* jasny kraft */
+  --kraft-bial: #f4ecda;   /* prawie-biały kraft */
+  --cien:       rgba(29,47,35,.28);
+
+  /* Typografia */
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-naglowek:'Oswald', sans-serif;
+  --font-tekst:   'Source Sans 3', system-ui, sans-serif;
+
+  /* Akcenty działów */
+  --zoo-akcent:    #8a5a3c;   /* cieplejszy brąz dla działu ZOO */
+  --wedka-akcent:  #2e6285;   /* woda dla działu WĘDKARSTWO */
+
+  --radius: 4px;
+  --maxw: 1180px;
+}
+
+/* ============================================================
+   2. RESET I PODSTAWY
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body{
+  font-family:var(--font-tekst);
+  color:var(--las-gleb);
+  line-height:1.65;
+  background-color:var(--kraft-jasn);
+  /* Tekstura papieru kraft — subtelny szum wygenerowany inline SVG */
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  overflow-x:hidden;
+}
+
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+
+/* ============================================================
+   3. TYPOGRAFIA POMOCNICZA
+   ============================================================ */
+.kicker{
+  font-family:var(--font-naglowek);
+  text-transform:uppercase;
+  letter-spacing:.32em;
+  font-size:.78rem;
+  font-weight:600;
+  color:var(--musztarda);
+}
+h1,h2,h3{font-family:var(--font-display);font-weight:400;line-height:.95;letter-spacing:.01em}
+.section-title{
+  font-size:clamp(2.6rem,7vw,5rem);
+  color:var(--las);
+  text-transform:uppercase;
+}
+
+/* Placeholder do podmiany — wizualnie oznaczony dyskretną ramką */
+.ph{
+  /* [DO PODMIANY] — pomocnicza klasa oznaczająca treść tymczasową */
+}
+
+/* ============================================================
+   4. UKŁAD / KONTENERY
+   ============================================================ */
+.wrap{width:min(92%,var(--maxw));margin-inline:auto}
+section{position:relative;padding:clamp(4rem,9vw,8rem) 0}
+
+/* ============================================================
+   5. PRZYCISKI / CTA
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-family:var(--font-naglowek);
+  text-transform:uppercase;letter-spacing:.14em;font-weight:600;
+  font-size:1rem;
+  padding:.95rem 1.9rem;
+  border:2px solid transparent;
+  border-radius:var(--radius);
+  cursor:pointer;
+  transition:transform .25s ease, box-shadow .25s ease, background-color .25s ease;
+  background:var(--musztarda);
+  color:var(--las-gleb);
+  box-shadow:0 6px 0 var(--drewno-cie);
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 9px 0 var(--drewno-cie)}
+.btn:active{transform:translateY(2px);box-shadow:0 3px 0 var(--drewno-cie)}
+.btn--ghost{
+  background:transparent;color:var(--kraft-bial);
+  border-color:var(--kraft);box-shadow:none;
+}
+.btn--ghost:hover{background:rgba(244,236,218,.12);box-shadow:none;transform:translateY(-3px)}
+
+/* ============================================================
+   6. NAGŁÓWEK / NAWIGACJA
+   ============================================================ */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.8rem clamp(1rem,4vw,3rem);
+  background:rgba(29,47,35,.0);
+  transition:background-color .35s ease, box-shadow .35s ease, padding .35s ease;
+}
+.topbar.scrolled{
+  background:rgba(29,47,35,.96);
+  box-shadow:0 4px 20px var(--cien);
+  padding-top:.55rem;padding-bottom:.55rem;
+}
+.brand{display:flex;align-items:center;gap:.6rem;color:var(--kraft-bial)}
+.brand .mark{width:38px;height:38px;flex:none}
+.brand .name{font-family:var(--font-display);font-size:1.7rem;letter-spacing:.06em;line-height:1}
+.brand .sub{font-family:var(--font-naglowek);font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--musztarda-j);display:block}
+.nav{display:flex;gap:1.6rem;align-items:center}
+.nav a{
+  font-family:var(--font-naglowek);text-transform:uppercase;
+  letter-spacing:.12em;font-size:.85rem;color:var(--kraft-bial);
+  opacity:.85;transition:opacity .2s, color .2s;position:relative;
+}
+.nav a::after{content:"";position:absolute;left:0;bottom:-5px;height:2px;width:0;background:var(--musztarda);transition:width .25s ease}
+.nav a:hover{opacity:1}
+.nav a:hover::after{width:100%}
+.nav-toggle{display:none;background:none;border:0;cursor:pointer;color:var(--kraft-bial)}
+.nav-toggle svg{width:30px;height:30px}
+
+@media(max-width:860px){
+  .nav{
+    position:fixed;inset:0 0 0 auto;width:min(78%,320px);
+    flex-direction:column;justify-content:center;gap:2rem;
+    background:var(--las-gleb);padding:2rem;
+    transform:translateX(100%);transition:transform .35s ease;
+  }
+  .nav.open{transform:translateX(0)}
+  .nav a{font-size:1.2rem}
+  .nav-toggle{display:block;z-index:101}
+}
+
+/* ============================================================
+   7. HERO + EFEKT FALUJĄCEJ WODY
+   ============================================================ */
+.hero{
+  min-height:100svh;display:flex;align-items:center;
+  padding-top:6rem;padding-bottom:8rem;
+  position:relative;overflow:hidden;
+  color:var(--kraft-bial);
+  /* Warstwowe tło: las u góry przechodzący w głębię wody */
+  background:
+    radial-gradient(120% 80% at 70% 0%, rgba(90,115,85,.35), transparent 60%),
+    linear-gradient(180deg, var(--las) 0%, var(--las-gleb) 45%, var(--woda) 100%);
+}
+/* Subtelny wzór drewnianych słojów na tle hero (czysty SVG) */
+.hero::before{
+  content:"";position:absolute;inset:0;opacity:.06;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cg fill='none' stroke='%23f4ecda' stroke-width='1.2'%3E%3Cpath d='M0 200 Q100 140 200 200 T400 200'/%3E%3Cpath d='M0 230 Q100 170 200 230 T400 230'/%3E%3Cpath d='M0 170 Q100 110 200 170 T400 170'/%3E%3Cpath d='M0 260 Q100 200 200 260 T400 260'/%3E%3Cpath d='M0 140 Q100 80 200 140 T400 140'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:600px;
+}
+.hero-inner{position:relative;z-index:3;max-width:760px}
+.hero .kicker{display:inline-flex;align-items:center;gap:.7rem;margin-bottom:1.2rem}
+.hero h1{
+  font-size:clamp(4.5rem,17vw,11rem);
+  letter-spacing:.02em;margin-bottom:.4rem;
+  text-shadow:0 4px 24px rgba(0,0,0,.35);
+}
+.hero h1 .accent{color:var(--musztarda)}
+.hero-tag{
+  font-family:var(--font-naglowek);font-weight:500;
+  font-size:clamp(1.05rem,2.6vw,1.5rem);
+  max-width:48ch;color:var(--kraft-jasn);margin-bottom:.6rem;
+}
+.hero-tag b{color:var(--musztarda-j);font-weight:600}
+.hero-cta{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem}
+
+/* Dwie pasje — drobne odznaki pod hasłem */
+.passions{display:flex;gap:1.4rem;margin-top:2.4rem;flex-wrap:wrap}
+.passion{display:flex;align-items:center;gap:.6rem;font-family:var(--font-naglowek);text-transform:uppercase;letter-spacing:.1em;font-size:.85rem}
+.passion svg{width:30px;height:30px;flex:none}
+
+/* --- Animowana woda na dole hero --- */
+.water{position:absolute;left:0;right:0;bottom:0;height:140px;z-index:2;overflow:hidden;line-height:0}
+.water svg{width:200%;height:100%;display:block}
+.wave{animation:fala 9s ease-in-out infinite alternate}
+.wave.w2{animation-duration:13s;opacity:.55}
+.wave.w3{animation-duration:17s;opacity:.35}
+@keyframes fala{from{transform:translateX(0)}to{transform:translateX(-25%)}}
+
+/* Pływające bąbelki/iskry światła na wodzie */
+.spark{position:absolute;bottom:0;width:6px;height:6px;border-radius:50%;
+  background:radial-gradient(circle,var(--musztarda-j),transparent 70%);
+  animation:unos 7s linear infinite;opacity:0}
+@keyframes unos{
+  0%{transform:translateY(20px) scale(.6);opacity:0}
+  20%{opacity:.8}
+  100%{transform:translateY(-130px) scale(1);opacity:0}
+}
+
+/* ============================================================
+   8. ANIMACJE WEJŚCIA (scroll-reveal) + PARALAKSA
+   ============================================================ */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .7s ease, transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}
+.reveal.d2{transition-delay:.16s}
+.reveal.d3{transition-delay:.24s}
+.reveal.d4{transition-delay:.32s}
+
+/* ============================================================
+   9. SEKCJA "O SKLEPIE"
+   ============================================================ */
+.about{background:var(--kraft-bial)}
+.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.about-text p{font-size:1.12rem;margin-top:1.2rem;color:#3a3327;max-width:54ch}
+.about-text .lead{font-size:1.35rem;font-weight:600;color:var(--las)}
+.about-card{
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  background:var(--drewno);color:var(--kraft-bial);
+  padding:2.4rem;min-height:340px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  box-shadow:0 18px 40px var(--cien);
+  /* Tekstura drewna na karcie */
+  background-image:
+    linear-gradient(180deg,rgba(74,50,32,.2),rgba(74,50,32,.65)),
+    repeating-linear-gradient(90deg, rgba(0,0,0,.06) 0 3px, transparent 3px 9px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cg fill='none' stroke='%23000' stroke-opacity='0.08' stroke-width='2'%3E%3Cpath d='M0 60 Q150 20 300 60'/%3E%3Cpath d='M0 120 Q150 80 300 120'/%3E%3Cpath d='M0 180 Q150 140 300 180'/%3E%3Cpath d='M0 240 Q150 200 300 240'/%3E%3C/g%3E%3C/svg%3E");
+}
+.about-card .est{font-family:var(--font-display);font-size:3rem;color:var(--musztarda-j);line-height:1}
+.about-card p{font-family:var(--font-naglowek);letter-spacing:.18em;text-transform:uppercase;font-size:.8rem}
+.stat-row{display:flex;gap:2rem;margin-top:1.4rem;flex-wrap:wrap}
+.stat b{display:block;font-family:var(--font-display);font-size:2.6rem;color:var(--musztarda-j);line-height:1}
+.stat span{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+
+@media(max-width:760px){.about-grid{grid-template-columns:1fr}}
+
+/* ============================================================
+   10. ASORTYMENT — DUALNY MOTYW ZOO / WĘDKARSTWO
+   ============================================================ */
+.asort{background:linear-gradient(180deg,var(--kraft-jasn),var(--kraft))}
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:3rem;border-radius:var(--radius);overflow:hidden;box-shadow:0 24px 60px var(--cien)}
+@media(max-width:820px){.dual{grid-template-columns:1fr}}
+
+.dual-col{padding:clamp(1.8rem,4vw,3rem)}
+.dual-col.zoo{background:linear-gradient(160deg,#7a5237,var(--drewno-cie))}
+.dual-col.wedka{background:linear-gradient(160deg,var(--woda-jasna),var(--woda))}
+.dual-col, .dual-col *{color:var(--kraft-bial)}
+.dual-head{display:flex;align-items:center;gap:1rem;margin-bottom:.4rem}
+.dual-head svg{width:54px;height:54px;flex:none}
+.dual-head h3{font-size:2.8rem;letter-spacing:.03em}
+.dual-col .label{font-family:var(--font-naglowek);text-transform:uppercase;letter-spacing:.24em;font-size:.72rem;opacity:.85}
+.dual-col > p{margin:.6rem 0 1.6rem;opacity:.92;max-width:42ch}
+
+.items{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+@media(max-width:480px){.items{grid-template-columns:1fr}}
+.item{
+  background:rgba(244,236,218,.10);
+  border:1px solid rgba(244,236,218,.18);
+  border-radius:var(--radius);
+  padding:1.1rem;
+  transition:transform .25s ease, background-color .25s ease;
+}
+.item:hover{transform:translateY(-4px);background:rgba(244,236,218,.18)}
+.item .ico{font-size:1.5rem}
+.item h4{font-family:var(--font-naglowek);font-weight:600;text-transform:uppercase;letter-spacing:.06em;font-size:1rem;margin:.4rem 0 .2rem}
+.item p{font-size:.9rem;opacity:.85;margin:0}
+
+/* ============================================================
+   11. WYRÓŻNIONE PRODUKTY / MARKI
+   ============================================================ */
+.features{background:var(--las);color:var(--kraft-bial)}
+.features .section-title{color:var(--kraft-bial)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;margin-top:3rem}
+.card{
+  background:var(--kraft-bial);color:var(--las-gleb);
+  border-radius:var(--radius);overflow:hidden;
+  box-shadow:0 12px 30px rgba(0,0,0,.3);
+  transition:transform .3s ease, box-shadow .3s ease;
+  display:flex;flex-direction:column;
+}
+.card:hover{transform:translateY(-8px);box-shadow:0 22px 44px rgba(0,0,0,.4)}
+.card-img{
+  aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;
+  position:relative;color:var(--kraft-bial);font-family:var(--font-naglowek);
+  text-transform:uppercase;letter-spacing:.2em;font-size:.7rem;
+}
+.card-img.z{background:linear-gradient(150deg,#8a5a3c,#4a3220)}
+.card-img.w{background:linear-gradient(150deg,#2e6285,#13283a)}
+.card-img .tag{position:absolute;top:.8rem;left:.8rem;background:var(--musztarda);color:var(--las-gleb);padding:.25rem .7rem;border-radius:99px;font-size:.62rem;letter-spacing:.14em}
+.card-img .big{font-family:var(--font-display);font-size:2rem;letter-spacing:.05em;opacity:.4}
+.card-body{padding:1.3rem}
+.card-body .brand-name{font-family:var(--font-naglowek);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--musztarda)}
+.card-body h4{font-family:var(--font-naglowek);font-weight:700;font-size:1.25rem;margin:.2rem 0 .5rem;text-transform:uppercase;letter-spacing:.02em}
+.card-body p{font-size:.92rem;color:#4a4334}
+.card-foot{margin-top:1rem;display:flex;align-items:center;justify-content:space-between}
+.price{font-family:var(--font-display);font-size:1.8rem;color:var(--las)}
+.price small{font-size:.7rem;color:#8a8270;letter-spacing:.1em}
+
+/* ============================================================
+   12. GODZINY + DOJAZD / MAPA
+   ============================================================ */
+.visit{background:var(--kraft-bial)}
+.visit-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(1.5rem,4vw,3rem);margin-top:2.5rem;align-items:stretch}
+@media(max-width:820px){.visit-grid{grid-template-columns:1fr}}
+
+.hours{background:var(--las-gleb);color:var(--kraft-bial);border-radius:var(--radius);padding:2rem;box-shadow:0 16px 36px var(--cien)}
+.hours h3{font-size:2.2rem;color:var(--musztarda-j);margin-bottom:1rem}
+.hours li{display:flex;justify-content:space-between;padding:.65rem 0;border-bottom:1px dashed rgba(244,236,218,.2);font-family:var(--font-naglowek);letter-spacing:.04em;font-size:.95rem}
+.hours li.dzis{color:var(--musztarda-j)}
+.hours li span:last-child{font-weight:600}
+.addr{margin-top:1.4rem;padding-top:1.2rem;border-top:2px solid rgba(244,236,218,.25)}
+.addr .big{font-family:var(--font-display);font-size:1.6rem;color:var(--kraft-bial);letter-spacing:.03em}
+.addr p{font-size:.95rem;opacity:.85}
+
+/* Mapa-placeholder z prostą siatką i znacznikiem (czysty CSS/SVG) */
+.map{
+  position:relative;border-radius:var(--radius);overflow:hidden;min-height:340px;
+  background:
+    linear-gradient(0deg,rgba(28,58,82,.08),rgba(47,74,55,.08)),
+    repeating-linear-gradient(0deg, rgba(47,74,55,.12) 0 1px, transparent 1px 42px),
+    repeating-linear-gradient(90deg, rgba(47,74,55,.12) 0 1px, transparent 1px 42px),
+    var(--kraft-jasn);
+  box-shadow:0 16px 36px var(--cien);
+  display:flex;align-items:center;justify-content:center;
+}
+/* stylizowana "rzeka" na mapie */
+.map::before{
+  content:"";position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' preserveAspectRatio='none'%3E%3Cpath d='M-20 320 C150 260 200 180 360 160 C470 145 520 60 640 40' fill='none' stroke='%232e6285' stroke-opacity='0.35' stroke-width='26' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-size:cover;
+}
+.pin{position:relative;z-index:2;text-align:center;color:var(--las)}
+.pin svg{width:52px;height:52px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.3))}
+.pin .pin-label{font-family:var(--font-naglowek);text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;background:var(--kraft-bial);padding:.3rem .8rem;border-radius:99px;display:inline-block;margin-top:.5rem;box-shadow:0 4px 10px var(--cien)}
+.map-note{position:absolute;bottom:.8rem;right:.9rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mech);background:rgba(244,236,218,.7);padding:.2rem .6rem;border-radius:4px}
+
+/* ============================================================
+   13. OPINIE KLIENTÓW
+   ============================================================ */
+.reviews{background:linear-gradient(180deg,var(--woda),var(--las-gleb));color:var(--kraft-bial)}
+.reviews .section-title{color:var(--kraft-bial)}
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem;margin-top:3rem}
+.quote{
+  background:rgba(244,236,218,.06);
+  border:1px solid rgba(244,236,218,.16);
+  border-left:4px solid var(--musztarda);
+  border-radius:var(--radius);padding:1.8rem;
+  transition:transform .3s ease, background-color .3s ease;
+}
+.quote:hover{transform:translateY(-6px);background:rgba(244,236,218,.11)}
+.stars{color:var(--musztarda-j);letter-spacing:.15em;font-size:1.05rem;margin-bottom:.7rem}
+.quote p{font-style:italic;font-size:1.05rem;line-height:1.6}
+.quote .who{margin-top:1.1rem;display:flex;align-items:center;gap:.7rem}
+.avatar{width:42px;height:42px;border-radius:50%;background:var(--musztarda);color:var(--las-gleb);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:1.3rem;flex:none}
+.who b{font-family:var(--font-naglowek);text-transform:uppercase;letter-spacing:.08em;font-size:.9rem}
+.who span{display:block;font-size:.78rem;opacity:.7}
+
+/* ============================================================
+   14. KONTAKT / FORMULARZ
+   ============================================================ */
+.contact{background:var(--kraft-bial)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);margin-top:2.5rem;align-items:start}
+@media(max-width:820px){.contact-grid{grid-template-columns:1fr}}
+.contact-info p{margin-top:1rem;font-size:1.1rem;color:#3a3327;max-width:44ch}
+.contact-list{margin-top:1.8rem;display:grid;gap:1rem}
+.contact-list a, .contact-list div{
+  display:flex;align-items:center;gap:1rem;
+  font-family:var(--font-naglowek);letter-spacing:.04em;
+  background:var(--kraft-jasn);padding:1rem 1.2rem;border-radius:var(--radius);
+  border-left:4px solid var(--musztarda);
+  transition:transform .2s ease;
+}
+.contact-list a:hover{transform:translateX(5px)}
+.contact-list svg{width:26px;height:26px;color:var(--las);flex:none}
+.contact-list b{display:block;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mech)}
+.contact-list span{font-size:1.05rem;color:var(--las-gleb)}
+
+form{display:grid;gap:1rem;background:var(--las);padding:clamp(1.6rem,4vw,2.4rem);border-radius:var(--radius);box-shadow:0 18px 40px var(--cien)}
+form .field{display:grid;gap:.35rem}
+form label{font-family:var(--font-naglowek);text-transform:uppercase;letter-spacing:.12em;font-size:.72rem;color:var(--musztarda-j)}
+form input, form select, form textarea{
+  font-family:var(--font-tekst);font-size:1rem;
+  padding:.8rem .9rem;border:2px solid rgba(244,236,218,.25);
+  border-radius:var(--radius);background:rgba(244,236,218,.95);color:var(--las-gleb);
+  transition:border-color .2s, box-shadow .2s;
+}
+form input:focus, form select:focus, form textarea:focus{
+  outline:none;border-color:var(--musztarda);box-shadow:0 0 0 3px rgba(212,148,58,.3);
+}
+form textarea{resize:vertical;min-height:120px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:480px){.form-row{grid-template-columns:1fr}}
+.form-msg{font-size:.9rem;color:var(--musztarda-j);min-height:1.2em;font-weight:600}
+
+/* ============================================================
+   15. STOPKA
+   ============================================================ */
+footer{background:var(--las-gleb);color:var(--kraft-jasn);padding:3.5rem 0 2rem}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2rem}
+@media(max-width:720px){.foot-grid{grid-template-columns:1fr;gap:1.6rem}}
+.foot-brand .name{font-family:var(--font-display);font-size:2.4rem;color:var(--kraft-bial);letter-spacing:.05em}
+.foot-brand p{opacity:.75;margin-top:.6rem;max-width:36ch;font-size:.95rem}
+.foot-col h5{font-family:var(--font-naglowek);text-transform:uppercase;letter-spacing:.18em;font-size:.8rem;color:var(--musztarda-j);margin-bottom:.9rem}
+.foot-col li{padding:.3rem 0;opacity:.82;font-size:.95rem}
+.foot-col a:hover{color:var(--musztarda-j)}
+.socials{display:flex;gap:.8rem;margin-top:.4rem}
+.socials a{
+  width:42px;height:42px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(244,236,218,.1);transition:background-color .25s, transform .25s;
+}
+.socials a:hover{background:var(--musztarda);transform:translateY(-3px)}
+.socials svg{width:20px;height:20px;color:var(--kraft-bial)}
+.copyright{margin-top:2.5rem;padding-top:1.4rem;border-top:1px solid rgba(244,236,218,.15);text-align:center;font-size:.82rem;opacity:.6;letter-spacing:.04em}
+
+/* ============================================================
+   16. RESPEKTOWANIE prefers-reduced-motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+  .reveal{opacity:1 !important;transform:none !important}
+  .wave{animation:none}
+  .spark{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAGŁÓWEK / NAWIGACJA
+     ============================================================ -->
+<header class="topbar" id="topbar">
+  <a href="#hero" class="brand" aria-label="ADAŚ — strona główna">
+    <!-- Emblemat: kompas (inline SVG) -->
+    <svg class="mark" viewBox="0 0 48 48" aria-hidden="true">
+      <circle cx="24" cy="24" r="21" fill="none" stroke="#d4943a" stroke-width="2.5"/>
+      <circle cx="24" cy="24" r="3" fill="#d4943a"/>
+      <path d="M24 7 L29 24 L24 41 L19 24 Z" fill="#f4ecda"/>
+      <path d="M24 7 L29 24 L24 24 Z" fill="#d4943a"/>
+    </svg>
+    <span>
+      <span class="name">ADAŚ</span>
+      <span class="sub">Zoo &middot; Wędkarstwo</span>
+    </span>
+  </a>
+
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+
+  <nav class="nav" id="nav">
+    <a href="#about">O sklepie</a>
+    <a href="#asort">Asortyment</a>
+    <a href="#features">Marki</a>
+    <a href="#visit">Dojazd</a>
+    <a href="#reviews">Opinie</a>
+    <a href="#contact">Kontakt</a>
+  </nav>
+</header>
+
+<!-- ============================================================
+     1. HERO
+     ============================================================ -->
+<section class="hero" id="hero">
+  <div class="wrap hero-inner">
+    <span class="kicker">
+      <!-- mała ryba -->
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M2 12c3-5 9-6 13-3l5-3-1 6 1 6-5-3c-4 3-10 2-13-3z" fill="none" stroke="#d4943a" stroke-width="1.8"/><circle cx="7" cy="11" r="1.1" fill="#d4943a"/></svg>
+      Sklep zoologiczno-wędkarski &middot; od [DO PODMIANY: rok]
+    </span>
+
+    <h1>ADA<span class="accent">Ś</span></h1>
+
+    <p class="hero-tag">
+      Dwie pasje, jeden adres. <b>Wszystko dla Twojego pupila</b> 🐾
+      i <b>wszystko nad wodę</b> 🎣 — karmy, akcesoria i sprzęt wędkarski
+      dobierany przez ludzi, którzy naprawdę kochają naturę.
+    </p>
+
+    <div class="passions">
+      <span class="passion">
+        <!-- łapa -->
+        <svg viewBox="0 0 32 32" aria-hidden="true"><g fill="#e8b15c"><ellipse cx="16" cy="22" rx="7" ry="6"/><circle cx="8" cy="13" r="3"/><circle cx="16" cy="9" r="3.2"/><circle cx="24" cy="13" r="3"/></g></svg>
+        Dział zoologiczny
+      </span>
+      <span class="passion">
+        <!-- haczyk wędkarski -->
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4v13a6 6 0 1 1-6-6" fill="none" stroke="#e8b15c" stroke-width="2.4" stroke-linecap="round"/><path d="M16 4l-3 3M16 4l3 3" stroke="#e8b15c" stroke-width="2.4" stroke-linecap="round"/></svg>
+        Dział wędkarski
+      </span>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#visit" class="btn">Odwiedź sklep
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="#asort" class="btn btn--ghost">Zobacz asortyment</a>
+    </div>
+  </div>
+
+  <!-- Animowana, falująca woda (3 nakładające się fale) -->
+  <div class="water" aria-hidden="true">
+    <svg viewBox="0 0 1440 140" preserveAspectRatio="none">
+      <path class="wave w3" fill="#13283a" d="M0,80 C240,40 480,120 720,80 C960,40 1200,120 1440,80 L1440,140 L0,140 Z"/>
+      <path class="wave w2" fill="#1c3a52" d="M0,90 C240,50 480,130 720,90 C960,50 1200,130 1440,90 L1440,140 L0,140 Z"/>
+      <path class="wave"    fill="#2e6285" d="M0,100 C240,70 480,130 720,100 C960,70 1200,130 1440,100 L1440,140 L0,140 Z"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ============================================================
+     2. O SKLEPIE
+     ============================================================ -->
+<section class="about" id="about">
+  <div class="wrap">
+    <span class="kicker reveal">Swojsko i po sąsiedzku</span>
+    <div class="about-grid">
+      <div class="about-text reveal d1">
+        <h2 class="section-title">O sklepie</h2>
+        <p class="lead">[DO PODMIANY] U nas każdy znajdzie coś dla siebie — i ten futrzasty, i ten znad rzeki.</p>
+        <p>ADAŚ to rodzinny sklep, w którym od lat spotykają się dwa światy: troska o domowe zwierzęta i miłość do wędkowania. Doradzimy przy karmie dla kota, dobierzemy żyłkę pod konkretną rybę i opowiemy, gdzie dziś bierze.</p>
+        <p>Stawiamy na sprawdzony asortyment, uczciwą cenę i rozmowę jak z sąsiadem — bez wciskania. Wpadnij, pogadamy. ☕</p>
+      </div>
+
+      <aside class="about-card reveal d2">
+        <span class="est">EST. [ROK]</span>
+        <p>Sklep zoologiczno-wędkarski</p>
+        <div class="stat-row">
+          <div class="stat"><b>2 w 1</b><span>Zoo + wędka</span></div>
+          <div class="stat"><b>500+</b><span>produktów</span></div>
+          <div class="stat"><b>100%</b><span>doradztwa</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     3. ASORTYMENT — DUALNY MOTYW
+     ============================================================ -->
+<section class="asort" id="asort">
+  <div class="wrap">
+    <span class="kicker reveal">Dwa działy pod jednym dachem</span>
+    <h2 class="section-title reveal d1">Asortyment</h2>
+
+    <div class="dual">
+      <!-- ===== DZIAŁ ZOOLOGICZNY ===== -->
+      <div class="dual-col zoo reveal d2">
+        <div class="dual-head">
+          <!-- odznaka: łapa -->
+          <svg viewBox="0 0 56 56" aria-hidden="true">
+            <circle cx="28" cy="28" r="26" fill="none" stroke="#e8b15c" stroke-width="2.5"/>
+            <g fill="#f4ecda"><ellipse cx="28" cy="36" rx="11" ry="9"/><circle cx="15" cy="22" r="4.5"/><circle cx="28" cy="16" r="5"/><circle cx="41" cy="22" r="4.5"/></g>
+          </svg>
+          <div>
+            <span class="label">Dział 🐾</span>
+            <h3>Zoologiczny</h3>
+          </div>
+        </div>
+        <p>Wszystko, czego potrzebuje pies, kot, gryzoń, ptak czy rybki — od miski po legowisko.</p>
+
+        <div class="items">
+          <div class="item"><div class="ico">🦴</div><h4>Karmy</h4><p>Sucha, mokra, dietetyczna i przysmaki.</p></div>
+          <div class="item"><div class="ico">🧸</div><h4>Akcesoria</h4><p>Smycze, obroże, zabawki, transportery.</p></div>
+          <div class="item"><div class="ico">🐟</div><h4>Akwarystyka</h4><p>Pokarmy, filtry, dekoracje, uzdatniacze.</p></div>
+          <div class="item"><div class="ico">🐹</div><h4>Małe zwierzęta</h4><p>Klatki, ściółki, siano i akcesoria.</p></div>
+          <div class="item"><div class="ico">🐦</div><h4>Ptaki</h4><p>Karmy, woliery, gniazda, witaminy.</p></div>
+          <div class="item"><div class="ico">🧴</div><h4>Pielęgnacja</h4><p>Szampony, preparaty, środki na pasożyty.</p></div>
+        </div>
+      </div>
+
+      <!-- ===== DZIAŁ WĘDKARSKI ===== -->
+      <div class="dual-col wedka reveal d3">
+        <div class="dual-head">
+          <!-- odznaka: ryba -->
+          <svg viewBox="0 0 56 56" aria-hidden="true">
+            <circle cx="28" cy="28" r="26" fill="none" stroke="#e8b15c" stroke-width="2.5"/>
+            <path d="M10 28c5-7 15-9 22-5l8-5-2 10 2 10-8-5c-7 4-17 2-22-5z" fill="none" stroke="#f4ecda" stroke-width="2.2"/>
+            <circle cx="18" cy="26" r="1.6" fill="#f4ecda"/>
+          </svg>
+          <div>
+            <span class="label">Dział 🎣</span>
+            <h3>Wędkarski</h3>
+          </div>
+        </div>
+        <p>Kompletny sprzęt na spinning, grunt i spławik — dla początkujących i wyjadaczy.</p>
+
+        <div class="items">
+          <div class="item"><div class="ico">🎣</div><h4>Wędziska</h4><p>Spinningowe, gruntowe, spławikowe.</p></div>
+          <div class="item"><div class="ico">🌀</div><h4>Kołowrotki</h4><p>Z przednim i tylnym hamulcem.</p></div>
+          <div class="item"><div class="ico">🪱</div><h4>Przynęty</h4><p>Gumy, woblery, błystki, zanęty.</p></div>
+          <div class="item"><div class="ico">🧵</div><h4>Żyłki i plecionki</h4><p>Pełen zakres średnic i wytrzymałości.</p></div>
+          <div class="item"><div class="ico">🪣</div><h4>Akcesoria</h4><p>Podbieraki, siatki, haczyki, krętliki.</p></div>
+          <div class="item"><div class="ico">⛺</div><h4>Biwak</h4><p>Krzesła, namioty, latarki, parasole.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     4. WYRÓŻNIONE PRODUKTY / MARKI
+     ============================================================ -->
+<section class="features" id="features">
+  <div class="wrap">
+    <span class="kicker reveal">Polecane z półki</span>
+    <h2 class="section-title reveal d1">Wyróżnione</h2>
+
+    <div class="cards">
+      <!-- Karta produktu ZOO -->
+      <article class="card reveal d1">
+        <div class="card-img z"><span class="tag">🐾 ZOO</span><span class="big">FOTO</span></div>
+        <div class="card-body">
+          <span class="brand-name">[MARKA]</span>
+          <h4>Karma premium dla psa</h4>
+          <p>[DO PODMIANY] Krótki opis produktu — skład, korzyści, dla kogo.</p>
+          <div class="card-foot">
+            <span class="price">[XX] zł <small>/ opak.</small></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Karta produktu WĘDKA -->
+      <article class="card reveal d2">
+        <div class="card-img w"><span class="tag">🎣 WĘDKA</span><span class="big">FOTO</span></div>
+        <div class="card-body">
+          <span class="brand-name">[MARKA]</span>
+          <h4>Zestaw spinningowy</h4>
+          <p>[DO PODMIANY] Wędzisko + kołowrotek — idealny na start.</p>
+          <div class="card-foot">
+            <span class="price">[XXX] zł <small>/ zestaw</small></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Karta produktu ZOO -->
+      <article class="card reveal d3">
+        <div class="card-img z"><span class="tag">🐾 ZOO</span><span class="big">FOTO</span></div>
+        <div class="card-body">
+          <span class="brand-name">[MARKA]</span>
+          <h4>Drapak dla kota</h4>
+          <p>[DO PODMIANY] Solidna konstrukcja, sizal naturalny.</p>
+          <div class="card-foot">
+            <span class="price">[XX] zł <small>/ szt.</small></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Karta produktu WĘDKA -->
+      <article class="card reveal d4">
+        <div class="card-img w"><span class="tag">🎣 WĘDKA</span><span class="big">FOTO</span></div>
+        <div class="card-body">
+          <span class="brand-name">[MARKA]</span>
+          <h4>Zestaw przynęt gumowych</h4>
+          <p>[DO PODMIANY] Sprawdzone kolory na okonia i szczupaka.</p>
+          <div class="card-foot">
+            <span class="price">[XX] zł <small>/ komplet</small></span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     5. GODZINY OTWARCIA + DOJAZD
+     ============================================================ -->
+<section class="visit" id="visit">
+  <div class="wrap">
+    <span class="kicker reveal">Wpadnij do nas</span>
+    <h2 class="section-title reveal d1">Godziny &amp; dojazd</h2>
+
+    <div class="visit-grid">
+      <!-- Godziny otwarcia -->
+      <div class="hours reveal d2">
+        <h3>Godziny otwarcia</h3>
+        <ul id="hoursList">
+          <li data-day="1"><span>Poniedziałek</span><span>9:00 – 18:00</span></li>
+          <li data-day="2"><span>Wtorek</span><span>9:00 – 18:00</span></li>
+          <li data-day="3"><span>Środa</span><span>9:00 – 18:00</span></li>
+          <li data-day="4"><span>Czwartek</span><span>9:00 – 18:00</span></li>
+          <li data-day="5"><span>Piątek</span><span>9:00 – 19:00</span></li>
+          <li data-day="6"><span>Sobota</span><span>9:00 – 14:00</span></li>
+          <li data-day="0"><span>Niedziela</span><span>Nieczynne</span></li>
+        </ul>
+        <div class="addr">
+          <span class="big">ul. [Nazwa] 00</span>
+          <p>[00-000] [Miejscowość] &middot; [DO PODMIANY]</p>
+        </div>
+      </div>
+
+      <!-- Mapa-placeholder -->
+      <div class="map reveal d3" role="img" aria-label="Mapa dojazdu — placeholder do podmiany">
+        <div class="pin">
+          <!-- znacznik lokalizacji -->
+          <svg viewBox="0 0 24 24" fill="#d4943a" stroke="#1d2f23" stroke-width="1.2"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.5 8 12 8 12s8-6.5 8-12c0-4.4-3.6-8-8-8z"/><circle cx="12" cy="10" r="3" fill="#1d2f23"/></svg>
+          <div class="pin-label">ADAŚ — tu jesteśmy</div>
+        </div>
+        <span class="map-note">[Wstaw mapę Google / OSM]</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     6. OPINIE KLIENTÓW
+     ============================================================ -->
+<section class="reviews" id="reviews">
+  <div class="wrap">
+    <span class="kicker reveal">Co mówią klienci</span>
+    <h2 class="section-title reveal d1">Opinie</h2>
+
+    <div class="quotes">
+      <blockquote class="quote reveal d1">
+        <div class="stars">★★★★★</div>
+        <p>„[DO PODMIANY] Doradzili mi karmę dla alergika — pies wreszcie przestał się drapać. Pełen profesjonalizm.”</p>
+        <div class="who"><span class="avatar">M</span><div><b>Marek K.</b><span>Opiekun psa</span></div></div>
+      </blockquote>
+
+      <blockquote class="quote reveal d2">
+        <div class="stars">★★★★★</div>
+        <p>„[DO PODMIANY] Najlepszy wybór przynęt w okolicy. Pan zawsze podpowie, gdzie i na co brać. Polecam!”</p>
+        <div class="who"><span class="avatar">A</span><div><b>Anna W.</b><span>Wędkarka</span></div></div>
+      </blockquote>
+
+      <blockquote class="quote reveal d3">
+        <div class="stars">★★★★★</div>
+        <p>„[DO PODMIANY] Sklep z duszą. Wszystko dla kota i jeszcze sprzęt na ryby dla męża — idealnie.”</p>
+        <div class="who"><span class="avatar">D</span><div><b>Dorota S.</b><span>Stała klientka</span></div></div>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     7. KONTAKT
+     ============================================================ -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <span class="kicker reveal">Masz pytanie?</span>
+    <h2 class="section-title reveal d1">Kontakt</h2>
+
+    <div class="contact-grid">
+      <!-- Dane kontaktowe -->
+      <div class="contact-info reveal d2">
+        <p>Napisz, zadzwoń albo po prostu wpadnij. Chętnie doradzimy w sprawie zwierząt i wędkowania.</p>
+        <div class="contact-list">
+          <a href="tel:+48000000000">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+            <span><b>Telefon</b><span>+48 [000 000 000]</span></span>
+          </a>
+          <a href="mailto:kontakt@adas.pl">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 10 7L22 6"/></svg>
+            <span><b>E-mail</b><span>[kontakt@adas.pl]</span></span>
+          </a>
+          <div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.5 8 12 8 12s8-6.5 8-12c0-4.4-3.6-8-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span><b>Adres</b><span>ul. [Nazwa] 00, [Miejscowość]</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formularz zapytania -->
+      <form id="contactForm" class="reveal d3" novalidate>
+        <div class="form-row">
+          <div class="field">
+            <label for="name">Imię</label>
+            <input type="text" id="name" name="name" placeholder="Jan" required>
+          </div>
+          <div class="field">
+            <label for="phone">Telefon</label>
+            <input type="tel" id="phone" name="phone" placeholder="000 000 000">
+          </div>
+        </div>
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" placeholder="jan@example.com" required>
+        </div>
+        <div class="field">
+          <label for="dept">Czego dotyczy zapytanie?</label>
+          <select id="dept" name="dept">
+            <option value="zoo">🐾 Dział zoologiczny</option>
+            <option value="wedka">🎣 Dział wędkarski</option>
+            <option value="inne">Inne</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="msg">Wiadomość</label>
+          <textarea id="msg" name="msg" placeholder="W czym możemy pomóc?" required></textarea>
+        </div>
+        <button type="submit" class="btn">Wyślij zapytanie
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+        <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     8. STOPKA
+     ============================================================ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="name">ADAŚ</span>
+        <p>Sklep zoologiczno-wędkarski. Dwie pasje, jeden adres — natura, woda i dobre doradztwo.</p>
+        <div class="socials">
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V5h-3c-2.2 0-4 1.8-4 4v2H7v4h3v6h4v-6h3l1-4h-4V9c0-.6.4-1 1-1z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Telefon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></a>
+        </div>
+      </div>
+
+      <div class="foot-col">
+        <h5>Godziny</h5>
+        <ul>
+          <li>Pon–Czw: 9:00 – 18:00</li>
+          <li>Piątek: 9:00 – 19:00</li>
+          <li>Sobota: 9:00 – 14:00</li>
+          <li>Niedziela: nieczynne</li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h5>Nawigacja</h5>
+        <ul>
+          <li><a href="#asort">Asortyment</a></li>
+          <li><a href="#features">Wyróżnione</a></li>
+          <li><a href="#visit">Dojazd</a></li>
+          <li><a href="#contact">Kontakt</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="copyright">
+      © <span id="year">2026</span> ADAŚ — Sklep zoologiczno-wędkarski. [DO PODMIANY] Wszelkie prawa zastrzeżone.
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   JS — interakcje, scroll-reveal, paralaksa, walidacja
+   Wszystko bez zależności, vanilla JS.
+   ============================================================ */
+(function(){
+  "use strict";
+
+  // Sprawdzenie preferencji ograniczenia ruchu
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* --- Menu mobilne --- */
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('nav');
+  toggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  // zamknięcie menu po kliknięciu w link
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    nav.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  /* --- Cień / tło paska nawigacji po przewinięciu --- */
+  const topbar = document.getElementById('topbar');
+  const onScroll = () => {
+    topbar.classList.toggle('scrolled', window.scrollY > 40);
+    // Lekka paralaksa tła hero
+    if(!reduceMotion){
+      const hero = document.querySelector('.hero');
+      if(hero){ hero.style.backgroundPositionY = (window.scrollY * 0.25) + 'px'; }
+    }
+  };
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* --- Scroll-reveal kart i sekcji (IntersectionObserver) --- */
+  const revealEls = document.querySelectorAll('.reveal');
+  if(reduceMotion){
+    // Bez animacji — pokaż od razu
+    revealEls.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting){
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold:0.15, rootMargin:'0px 0px -8% 0px' });
+    revealEls.forEach(el => io.observe(el));
+  }
+
+  /* --- Iskry/bąbelki na wodzie w hero (generowane dynamicznie) --- */
+  if(!reduceMotion){
+    const water = document.querySelector('.water');
+    if(water){
+      for(let i=0;i<14;i++){
+        const s = document.createElement('span');
+        s.className = 'spark';
+        s.style.left = Math.random()*100 + '%';
+        s.style.animationDelay = (Math.random()*7) + 's';
+        s.style.animationDuration = (5 + Math.random()*5) + 's';
+        const scale = 0.5 + Math.random()*1.4;
+        s.style.transform = `scale(${scale})`;
+        water.appendChild(s);
+      }
+    }
+  }
+
+  /* --- Podświetlenie dzisiejszego dnia w godzinach otwarcia --- */
+  const today = new Date().getDay(); // 0 = niedziela
+  const todayLi = document.querySelector(`#hoursList li[data-day="${today}"]`);
+  if(todayLi){
+    todayLi.classList.add('dzis');
+  }
+
+  /* --- Rok w stopce --- */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* --- Obsługa formularza (demo, bez wysyłki na serwer) --- */
+  const form = document.getElementById('contactForm');
+  const formMsg = document.getElementById('formMsg');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const msg = form.msg.value.trim();
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    if(!name || !emailOk || !msg){
+      formMsg.style.color = '#e8b15c';
+      formMsg.textContent = 'Uzupełnij imię, poprawny e-mail i treść wiadomości.';
+      return;
+    }
+    // [DO PODMIANY] — tutaj podłącz wysyłkę (np. backend / usługa formularzy)
+    formMsg.style.color = '#9fd3a0';
+    formMsg.textContent = '✓ Dziękujemy! To wersja demo — wiadomość nie została wysłana.';
+    form.reset();
+  });
+})();
+</script>
+
+<!-- ============================================================
+     INSTRUKCJA PODGLĄDU
+     ------------------------------------------------------------
+     1. Zapisz ten plik jako "index.html".
+     2. Podgląd najprościej: kliknij dwukrotnie plik — otworzy się
+        w przeglądarce (Chrome/Firefox/Edge). Działa też offline,
+        bo wszystkie style i skrypty są w jednym pliku.
+        (Wymagane jedynie połączenie z internetem dla czcionek Google;
+         bez nich strona zadziała na czcionkach zapasowych.)
+     3. Lokalny serwer (opcjonalnie, zalecane przy testach):
+          • Python:  python -m http.server 8000   →  http://localhost:8000
+          • Node:    npx serve .
+          • VS Code: rozszerzenie "Live Server" → "Open with Live Server".
+     4. PODMIEŃ wszystkie pola oznaczone [DO PODMIANY] / [ROK] / [MARKA]
+        / [XX] zł oraz dane teleadresowe na prawdziwe.
+        Mapę zastąp osadzeniem (iframe) z Map Google lub OpenStreetMap
+        w sekcji z klasą ".map".
+     5. Zdjęcia produktów wstaw w miejsce kafelków ".card-img"
+        (np. <img src="..."> zamiast napisu "FOTO").
+     ============================================================ -->
+</body>
+</html>
